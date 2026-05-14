@@ -131,6 +131,63 @@
     </div>;
 
 
+  /* ---------- 1-10 scale picker for the Personal "How are you doing with The Five?" row ---------- */
+  const ScaleRow = ({ scale, qNum }) => {
+    const inputRef = React.useRef(null);
+    const [value, setValue] = useState('');
+    useEffect(() => {
+      const input = inputRef.current;
+      if (!input) return;
+      const handler = () => setValue(input.value);
+      input.addEventListener('input', handler);
+      setValue(input.value);
+      return () => input.removeEventListener('input', handler);
+    }, []);
+    const select = (n) => {
+      const next = value === String(n) ? '' : String(n);
+      const input = inputRef.current;
+      if (input) {
+        const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
+        setter.call(input, next);
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+      setValue(next);
+    };
+    return (
+      <div style={{ marginBottom: 8 }}>
+        <input ref={inputRef} type="text"
+          data-mp-row={'five.' + scale}
+          data-mp-col={'Q' + qNum}
+          style={{ position: 'absolute', width: 1, height: 1, opacity: 0, pointerEvents: 'none' }}
+          tabIndex={-1} aria-hidden="true" readOnly />
+        <div style={{
+          fontFamily: 'Montserrat', fontWeight: 800, fontSize: 9, letterSpacing: '0.14em',
+          textTransform: 'uppercase', color: 'var(--ink-soft)', marginBottom: 3, lineHeight: 1.2,
+        }}>{scale}</div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(10, 1fr)', gap: 2 }}>
+          {[1,2,3,4,5,6,7,8,9,10].map((n) => {
+            const active = value === String(n);
+            return (
+              <button key={n} type="button" onClick={() => select(n)} className="mp-print-hide" style={{
+                background: active ? 'var(--ink)' : 'transparent',
+                color: active ? 'var(--paper)' : 'var(--ink)',
+                border: '1px solid var(--ink)',
+                fontFamily: 'Montserrat', fontWeight: 700, fontSize: 9,
+                padding: 0, height: 18, lineHeight: 1, cursor: 'pointer',
+              }}>{n}</button>
+            );
+          })}
+        </div>
+        {/* Print-only display of the chosen value */}
+        <div style={{ display: 'none' }} className="mp-print-only" />
+      </div>
+    );
+  };
+  const ScaleCell = ({ qNum }) =>
+    <div>
+      {C.PERSONAL_FIVE_SCALES.map((s) => <ScaleRow key={s} scale={s} qNum={qNum} />)}
+    </div>;
+
   const Personal = ({ dark, dateLabels, subLabels }) =>
   <div data-mp-region="personal">
       <div style={{ display: 'grid', gridTemplateColumns: '1.6fr repeat(4, 1fr)', gap: 0, border: dark ? '1.5px solid var(--accent)' : '1.5px solid var(--ink)' }}>
@@ -147,28 +204,33 @@
             {(subLabels && subLabels[i]) && <div style={{ fontFamily: 'Montserrat', fontWeight: 700, fontSize: 9, letterSpacing: '0.14em', lineHeight: 1.4, color: 'var(--accent)', textTransform: 'uppercase', marginTop: 4 }}>{subLabels[i]}</div>}
           </div>
       )}
-        {C.PERSONAL_PROMPTS.map((p, ri) =>
-      <React.Fragment key={p}>
-            <div style={{
-          padding: '16px',
-          borderTop: dark ? '1px solid rgba(184,117,74,0.4)' : '1px solid var(--ink)',
-          borderRight: dark ? '1px solid rgba(184,117,74,0.4)' : '1px solid var(--ink)',
-          minHeight: 110
-        }}>
-              <span style={{ fontFamily: 'Montserrat', fontWeight: 800, fontSize: 13, lineHeight: 1.4, color: dark ? 'var(--paper)' : 'var(--ink)' }}>{p}</span>
-            </div>
-            {[0, 1, 2, 3].map((ci) =>
-        <div key={ci} data-mp-row={p} data-mp-col={'Q' + (ci + 1)} style={{
-          padding: 12,
-          borderTop: dark ? '1px solid rgba(184,117,74,0.4)' : '1px solid var(--ink)',
-          borderRight: ci === 3 ? 'none' : dark ? '1px solid rgba(184,117,74,0.4)' : '1px solid var(--ink)',
-          minHeight: 110
-        }}>
-                <Area rows={4} on={dark ? 'dark' : 'paper'} row={p} col={'Q' + (ci + 1)} />
+        {C.PERSONAL_PROMPTS.map((p, ri) => {
+          const isFiveScales = ri === 0;
+          return (
+            <React.Fragment key={p}>
+              <div style={{
+                padding: '16px',
+                borderTop: dark ? '1px solid rgba(184,117,74,0.4)' : '1px solid var(--ink)',
+                borderRight: dark ? '1px solid rgba(184,117,74,0.4)' : '1px solid var(--ink)',
+                minHeight: isFiveScales ? 220 : 110,
+              }}>
+                <span style={{ fontFamily: 'Montserrat', fontWeight: 800, fontSize: 13, lineHeight: 1.4, color: dark ? 'var(--paper)' : 'var(--ink)' }}>{p}</span>
               </div>
-        )}
-          </React.Fragment>
-      )}
+              {[0, 1, 2, 3].map((ci) =>
+                <div key={ci} data-mp-row={p} data-mp-col={'Q' + (ci + 1)} style={{
+                  padding: isFiveScales ? '12px 10px' : 12,
+                  borderTop: dark ? '1px solid rgba(184,117,74,0.4)' : '1px solid var(--ink)',
+                  borderRight: ci === 3 ? 'none' : dark ? '1px solid rgba(184,117,74,0.4)' : '1px solid var(--ink)',
+                  minHeight: isFiveScales ? 220 : 110,
+                }}>
+                  {isFiveScales
+                    ? <ScaleCell qNum={ci + 1} />
+                    : <Area rows={4} on={dark ? 'dark' : 'paper'} row={p} col={'Q' + (ci + 1)} />}
+                </div>
+              )}
+            </React.Fragment>
+          );
+        })}
       </div>
     </div>;
 

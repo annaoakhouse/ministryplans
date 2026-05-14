@@ -10,11 +10,19 @@ window.MP = (() => {
   ];
 
   const PERSONAL_PROMPTS = [
-    'How is your time with Jesus?',
+    'How are you doing with The Five?',
     'What\u2019s bringing you joy in ministry right now?',
     'What challenges are you carrying personally?',
     'What development do you need this quarter?',
     'Books, conferences, or coaching desired?',
+  ];
+
+  const PERSONAL_FIVE_SCALES = [
+    'Hour a Day',
+    'One Step a Week',
+    'One Cause',
+    'One Group',
+    'One Teacher',
   ];
 
   const VALUES_INTRO_MINISTRY =
@@ -90,6 +98,7 @@ window.MP = (() => {
   return {
     QUARTERS,
     PERSONAL_PROMPTS,
+    PERSONAL_FIVE_SCALES,
     VALUES_INTRO_MINISTRY,
     VALUES_INTRO_DEPARTMENT,
     VALUES_COLS,
