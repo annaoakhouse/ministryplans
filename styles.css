@@ -1,0 +1,114 @@
+/* ===== Oakhouse Ministry Plan Template — base styles ===== */
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('fonts/Montserrat-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Montserrat';
+  src: url('fonts/Montserrat-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Montserrat';
+  src: url('fonts/Montserrat-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Montserrat';
+  src: url('fonts/Montserrat-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Montserrat';
+  src: url('fonts/Montserrat-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Montserrat';
+  src: url('fonts/Montserrat-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Florsn';
+  src: url('fonts/Florsn01.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Florsn';
+  src: url('fonts/Florsn02.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Florsn';
+  src: url('fonts/Florsn03.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --ink: #1d2733;
+  --ink-2: #2d3a4a;
+  --ink-soft: #4a5765;
+  --paper: #f4ede1;
+  --paper-2: #ebe1cd;
+  --paper-3: #e3d6bb;
+  --white: #ffffff;
+  --accent: #b8754a;   /* brown for highlights */
+  --accent-2: #8a5a3b;
+  --rule: #1d2733;
+  --ghost: rgba(29,39,51,0.08);
+  --ghost-2: rgba(29,39,51,0.18);
+}
+
+/* ===== fillable input primitives — shared by all 3 variations ===== */
+.mp-input,
+.mp-area {
+  font-family: 'Montserrat', sans-serif;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--ink);
+  width: 100%;
+  padding: 0;
+  resize: none;
+  box-sizing: border-box;
+}
+.mp-input { font-size: 14px; font-weight: 500; line-height: 1.4; }
+.mp-area  { font-size: 13px; font-weight: 400; line-height: 1.5; }
+.mp-input::placeholder, .mp-area::placeholder {
+  color: rgba(29,39,51,0.32);
+  font-weight: 400;
+  font-style: normal;
+}
+.mp-input:focus, .mp-area:focus { background: rgba(255,255,255,0.5); }
+.mp-input.on-dark, .mp-area.on-dark { color: var(--paper); }
+.mp-input.on-dark::placeholder, .mp-area.on-dark::placeholder { color: rgba(244,237,225,0.35); }
+.mp-input.on-dark:focus, .mp-area.on-dark:focus { background: rgba(255,255,255,0.08); }
+
+/* Print: hide canvas chrome, let pages flow */
+@media print {
+  body { background: white !important; }
+  .mp-print-hide { display: none !important; }
+  /* In print, show every quarter calendar regardless of which tab is "active". */
+  .mp-quarter-panel { display: block !important; }
+  .mp-quarter-panel + .mp-quarter-panel { page-break-before: always; }
+}

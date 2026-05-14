@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Oakhouse Personal Plan — Live</title>
+<link rel="stylesheet" href="styles.css" />
+<style>
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Montserrat', system-ui, sans-serif;
+    background: #d8d4cb;
+    min-height: 100vh;
+    padding-bottom: 80px;
+  }
+  .mp-stage {
+    width: 880px;
+    max-width: 100%;
+    margin: 36px auto 60px;
+    background: white;
+    box-shadow: 0 18px 60px rgba(29, 39, 51, 0.18), 0 4px 14px rgba(29, 39, 51, 0.08);
+    overflow: hidden;
+  }
+  @media print {
+    body { background: white; padding-bottom: 0; }
+    .mp-stage { margin: 0; width: 100%; box-shadow: none; }
+    .mp-stage > * { width: 100% !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- =============================================================
+     PERSONAL plan — embed per-staff-member, e.g.
+       <iframe src="…/Ministry Plan Personal - Live.html?plan=jane-doe"></iframe>
+     ============================================================= -->
+<script>
+  window.MP_BACKEND_URL = "https://script.google.com/macros/s/AKfycbyCyKGwnpfwTyocZUc4IwMHUy_G1rJeZoGL6CTSIwcrYLD82jv-vWOY8AUFd91ai8hX/exec";
+  window.MP_DEFAULT_PLAN = "personal-default";
+  window.MP_WRITE_SECRET = "";
+  window.MP_LIVE_MODE = "personal";  // switches submitter label to "Name"
+</script>
+
+<div id="root" class="mp-stage"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script src="mp-content.js"></script>
+<script type="text/babel" src="v3-contrast.jsx"></script>
+<script type="text/babel" src="mp-live.jsx"></script>
+
+<script type="text/babel">
+  setTimeout(() => {
+    const App = window.MPPersonal;
+    const Live = window.MPLive;
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    const liveHost = document.createElement('div');
+    liveHost.id = 'mp-live-root';
+    document.body.appendChild(liveHost);
+    ReactDOM.createRoot(liveHost).render(<Live />);
+  }, 60);
+</script>
+
+</body>
+</html>
