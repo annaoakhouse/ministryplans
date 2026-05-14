@@ -179,12 +179,12 @@
       width: '100%',
       background: 'transparent',
       border: 'none',
-      borderBottom: '1.5px solid rgba(244,237,225,0.45)',
+      borderBottom: '1.5px solid rgba(29,39,51,0.35)',
       outline: 'none',
       fontFamily: 'Montserrat',
       fontWeight: 700,
       fontSize: 14,
-      color: 'var(--paper)',
+      color: 'var(--ink)',
       padding: '6px 2px',
     };
     const labelStyle = {
@@ -204,14 +204,14 @@
       }}>
         <div style={{
           fontFamily: 'Montserrat', fontWeight: 500, fontSize: 11, lineHeight: 1.55,
-          color: 'rgba(244,237,225,0.7)', alignSelf: 'center',
+          color: 'var(--ink-soft)', alignSelf: 'center',
         }}>
           <span style={{ fontWeight: 800, color: 'var(--accent)', letterSpacing: '0.22em', textTransform: 'uppercase', fontSize: 9 }}>Plan ID</span>{' '}
-          <span style={{ fontWeight: 800, color: 'var(--paper)', letterSpacing: '0.04em' }}>{planKey}</span>
+          <span style={{ fontWeight: 800, color: 'var(--ink)', letterSpacing: '0.04em' }}>{planKey}</span>
           {personalKey && <React.Fragment>
             {' · '}
             <span style={{ fontWeight: 800, color: 'var(--accent)', letterSpacing: '0.22em', textTransform: 'uppercase', fontSize: 9 }}>Personal</span>{' '}
-            <span style={{ fontWeight: 800, color: 'var(--paper)', letterSpacing: '0.04em' }}>{personalKey}</span>
+            <span style={{ fontWeight: 800, color: 'var(--ink)', letterSpacing: '0.04em' }}>{personalKey}</span>
           </React.Fragment>}
           <br/>
           {entryCount} {entryCount === 1 ? 'entry' : 'entries'} · autosaves as you type.
