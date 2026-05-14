@@ -131,7 +131,7 @@
     </div>;
 
 
-  const Personal = ({ dark }) =>
+  const Personal = ({ dark, dateLabels, subLabels }) =>
   <div data-mp-region="personal">
       <div style={{ display: 'grid', gridTemplateColumns: '1.6fr repeat(4, 1fr)', gap: 0, border: dark ? '1.5px solid var(--accent)' : '1.5px solid var(--ink)' }}>
         <div style={{ padding: '14px 16px', borderRight: dark ? '1px solid rgba(184,117,74,0.4)' : '1px solid var(--ink)', background: dark ? 'rgba(184,117,74,0.18)' : 'var(--paper-2)' }}>
@@ -143,8 +143,8 @@
         borderRight: i === 3 ? 'none' : dark ? '1px solid rgba(184,117,74,0.4)' : '1px solid var(--ink)',
         background: dark ? 'rgba(184,117,74,0.18)' : 'var(--paper-2)'
       }}>
-            <div style={{ fontFamily: 'Montserrat', fontWeight: 900, fontSize: 14, letterSpacing: '0.02em', color: dark ? 'var(--paper)' : 'var(--ink)' }}>Q{q.n}</div>
-            <div style={{ fontFamily: 'Montserrat', fontWeight: 700, fontSize: 9, letterSpacing: '0.18em', color: 'var(--accent)' }}>{q.date}</div>
+            <div style={{ fontFamily: 'Montserrat', fontWeight: 900, fontSize: 13, letterSpacing: '0.02em', lineHeight: 1.2, color: dark ? 'var(--paper)' : 'var(--ink)', textTransform: 'uppercase' }}>{(dateLabels && dateLabels[i]) || ('Q' + q.n)}</div>
+            {(subLabels && subLabels[i]) && <div style={{ fontFamily: 'Montserrat', fontWeight: 700, fontSize: 9, letterSpacing: '0.14em', lineHeight: 1.4, color: 'var(--accent)', textTransform: 'uppercase', marginTop: 4 }}>{subLabels[i]}</div>}
           </div>
       )}
         {C.PERSONAL_PROMPTS.map((p, ri) =>
@@ -855,6 +855,19 @@
     );
   };
 
+  const PERSONAL_DATE_LABELS = [
+    'Start of the Year',
+    'End of Quarter 1',
+    'Mid Year',
+    'End of Quarter 3',
+  ];
+  const PERSONAL_SUB_LABELS = [
+    'July',
+    'September',
+    'January',
+    'March',
+  ];
+
   /* ---------- Personal panel (inline tab, separate plan key) ---------- */
   const PersonalPanelInline = ({ personalKey }) => {
     const isLive = !!window.MP_BACKEND_URL;
@@ -878,7 +891,7 @@
         )}
         <Paper>
           <Sub intro="Each quarter, return to these five prompts. Be honest. The numbers below come back around in December, March, and June.">Personal Development</Sub>
-          <Personal />
+          <Personal dateLabels={PERSONAL_DATE_LABELS} subLabels={PERSONAL_SUB_LABELS} />
         </Paper>
       </React.Fragment>
     );
@@ -1113,7 +1126,7 @@
         <div data-mp-personal-root>
           <Paper>
             <Sub intro="Each quarter, return to these five prompts. Be honest. The numbers below come back around in December, March, and June.">Personal Development</Sub>
-            <Personal />
+            <Personal dateLabels={PERSONAL_DATE_LABELS} subLabels={PERSONAL_SUB_LABELS} />
           </Paper>
         </div>
 
