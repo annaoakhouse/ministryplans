@@ -1213,4 +1213,23 @@
   };
 
   window.MPPersonal = PersonalStandalone;
+
+  /* ---------- Auto-grow textareas ---------- */
+  function autosize(t) {
+    if (!t) return;
+    t.style.height = 'auto';
+    t.style.height = (t.scrollHeight + 2) + 'px';
+  }
+  document.addEventListener('input', (e) => {
+    if (e.target && e.target.tagName === 'TEXTAREA' && e.target.classList.contains('mp-area')) {
+      autosize(e.target);
+    }
+  }, true);
+  // Initial pass after mount + a second pass after the async hydrate from the server.
+  setTimeout(() => document.querySelectorAll('textarea.mp-area').forEach(autosize), 300);
+  setTimeout(() => document.querySelectorAll('textarea.mp-area').forEach(autosize), 1500);
+  // Re-grow when tab changes (since hidden textareas don't get input events while hidden).
+  setInterval(() => document.querySelectorAll('textarea.mp-area').forEach((t) => {
+    if (t.offsetParent && t.scrollHeight > t.clientHeight + 2) autosize(t);
+  }), 1200);
 })();

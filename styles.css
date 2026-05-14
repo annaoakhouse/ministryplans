@@ -93,7 +93,7 @@
   box-sizing: border-box;
 }
 .mp-input { font-size: 14px; font-weight: 500; line-height: 1.4; }
-.mp-area  { font-size: 13px; font-weight: 400; line-height: 1.5; }
+.mp-area  { font-size: 13px; font-weight: 400; line-height: 1.5; min-height: 1.5em; overflow: hidden; }
 .mp-input::placeholder, .mp-area::placeholder {
   color: rgba(29,39,51,0.32);
   font-weight: 400;
