@@ -27,7 +27,10 @@
 
 
   /* ---------- chapter divider ---------- */
-  const ChapterSpread = ({ num, title, kicker, mark }) =>
+  const ChapterSpread = ({ num, title, kicker, mark }) => {
+    const len = (title || '').length;
+    const titleFontSize = len > 38 ? 44 : len > 28 ? 60 : len > 20 ? 78 : 96;
+    return (
   <section style={{
     margin: '64px -64px 0',
     background: 'var(--ink)',
@@ -54,7 +57,7 @@
           <span style={{ width: 36, height: 2, background: 'var(--accent)' }} />
           <span style={{ fontFamily: 'Montserrat', fontWeight: 800, fontSize: 11, letterSpacing: '0.32em', color: 'var(--accent)', textTransform: 'uppercase' }}>{kicker}</span>
         </div>
-        <h2 style={{ margin: 0, fontFamily: 'Montserrat', fontWeight: 900, fontSize: 96, lineHeight: 0.9, letterSpacing: '-0.02em', color: 'var(--paper)', textTransform: 'uppercase' }}>
+        <h2 style={{ margin: 0, fontFamily: 'Montserrat', fontWeight: 900, fontSize: titleFontSize, lineHeight: 0.9, letterSpacing: '-0.02em', color: 'var(--paper)', textTransform: 'uppercase', overflowWrap: 'break-word', wordBreak: 'break-word', hyphens: 'auto' }}>
           {title}
         </h2>
         {mark &&
@@ -63,7 +66,8 @@
           </div>
       }
       </div>
-    </section>;
+    </section>);
+  };
 
 
   /* paper sections sit on white between navy spreads */
@@ -364,11 +368,12 @@
           {teams.map((team, ri) =>
           <div key={ri} data-mp-row={team} style={{ display: 'grid', gridTemplateColumns: '180px minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) 36px', borderTop: ri === 0 ? 'none' : '1px solid var(--ink)' }}>
               <div style={{ padding: '14px 14px 14px 16px', background: 'rgba(29,39,51,0.06)', display: 'flex', alignItems: 'flex-start' }}>
-                <input
-                type="text"
+                <textarea
                 value={team}
+                rows={1}
                 onChange={(e) => renameTeam(ri, e.target.value)}
                 spellCheck={false}
+                className="mp-area"
                 style={{
                   width: '100%',
                   background: 'transparent',
@@ -377,13 +382,17 @@
                   outline: 'none',
                   fontFamily: 'Montserrat',
                   fontWeight: 900,
-                  fontSize: 17,
+                  fontSize: (team || '').length > 22 ? 13 : (team || '').length > 14 ? 15 : 17,
                   letterSpacing: '0.02em',
+                  lineHeight: 1.15,
                   color: 'var(--ink)',
                   textTransform: 'uppercase',
-                  padding: '4px 0 6px'
+                  padding: '4px 0 6px',
+                  resize: 'none',
+                  overflow: 'hidden',
+                  overflowWrap: 'break-word',
+                  wordBreak: 'break-word',
                 }} />
-              
               </div>
               {C.TEAM_COLS.map((col, ci) => {
               const colKeys = ['current', 'goal', 'priority', 'actions'];
