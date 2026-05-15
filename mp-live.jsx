@@ -173,61 +173,38 @@
 
   /* ---------------- Submitter block (top of form) ---------------- */
 
-  const SubmitterBlock = ({ planKey, personalKey, quarter, year, onChange, entryCount }) => {
-    const set = (k) => (e) => onChange({ [k]: e.target.value });
-    const inputStyle = {
-      width: '100%',
-      background: 'transparent',
-      border: 'none',
-      borderBottom: '1.5px solid rgba(29,39,51,0.35)',
-      outline: 'none',
-      fontFamily: 'Montserrat',
-      fontWeight: 700,
-      fontSize: 14,
-      color: 'var(--ink)',
-      padding: '6px 2px',
-    };
-    const labelStyle = {
-      display: 'block', fontFamily: 'Montserrat', fontWeight: 800, fontSize: 9,
-      letterSpacing: '0.28em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 6,
-    };
+  const SubmitterBlock = ({ planKey, personalKey, year, entryCount }) => {
     return (
       <div data-mp-submitter="true" className="mp-print-hide" style={{
         margin: '0 -64px',
-        padding: '20px 64px 22px',
+        padding: '14px 64px 16px',
         background: 'rgba(184,117,74,0.12)',
         borderBottom: '1px solid rgba(184,117,74,0.5)',
-        display: 'grid',
-        gridTemplateColumns: '1fr 0.7fr 0.7fr',
+        display: 'flex',
         gap: 22,
-        alignItems: 'end',
+        alignItems: 'baseline',
+        fontFamily: 'Montserrat',
+        fontSize: 11,
+        lineHeight: 1.55,
+        color: 'var(--ink-soft)',
+        flexWrap: 'wrap',
       }}>
-        <div style={{
-          fontFamily: 'Montserrat', fontWeight: 500, fontSize: 11, lineHeight: 1.55,
-          color: 'var(--ink-soft)', alignSelf: 'center',
-        }}>
+        <div>
           <span style={{ fontWeight: 800, color: 'var(--accent)', letterSpacing: '0.22em', textTransform: 'uppercase', fontSize: 9 }}>Plan ID</span>{' '}
           <span style={{ fontWeight: 800, color: 'var(--ink)', letterSpacing: '0.04em' }}>{planKey}</span>
-          {personalKey && <React.Fragment>
-            {' · '}
+        </div>
+        {personalKey && (
+          <div>
             <span style={{ fontWeight: 800, color: 'var(--accent)', letterSpacing: '0.22em', textTransform: 'uppercase', fontSize: 9 }}>Personal</span>{' '}
             <span style={{ fontWeight: 800, color: 'var(--ink)', letterSpacing: '0.04em' }}>{personalKey}</span>
-          </React.Fragment>}
-          <br/>
-          {entryCount} {entryCount === 1 ? 'entry' : 'entries'} · autosaves as you type.
-        </div>
+          </div>
+        )}
         <div>
-          <label style={labelStyle}>Quarter</label>
-          <select value={quarter || ''} onChange={set('quarter')} style={{ ...inputStyle, appearance: 'none' }}>
-            <option value="Q1">Q1 (Jul–Sep)</option>
-            <option value="Q2">Q2 (Oct–Dec)</option>
-            <option value="Q3">Q3 (Jan–Mar)</option>
-            <option value="Q4">Q4 (Apr–Jun)</option>
-          </select>
+          <span style={{ fontWeight: 800, color: 'var(--accent)', letterSpacing: '0.22em', textTransform: 'uppercase', fontSize: 9 }}>Year</span>{' '}
+          <span style={{ fontWeight: 800, color: 'var(--ink)', letterSpacing: '0.04em' }}>{year}</span>
         </div>
-        <div>
-          <label style={labelStyle}>Year</label>
-          <input style={inputStyle} value={year || ''} onChange={set('year')} placeholder="2026-27" />
+        <div style={{ marginLeft: 'auto', color: 'var(--ink-soft)', fontStyle: 'italic' }}>
+          {entryCount} {entryCount === 1 ? 'entry' : 'entries'} · autosaves as you type
         </div>
       </div>
     );
@@ -307,10 +284,11 @@
     const isPersonalOnly = window.MP_LIVE_MODE === 'personal';
     const planKey = getPlanKey();
     const personalKey = isPersonalOnly ? '' : getPersonalKey();
-    const [planMeta, setPlanMeta] = useState({
-      quarter: defaultQuarter(),
-      year: defaultYear(),
-    });
+    // Quarter + year are LOCKED — the plan stores one row per plan_key for the whole year.
+    // The MP_YEAR config in the HTML controls which fiscal year's row this page reads/writes.
+    const lockedQuarter = 'Q1';
+    const lockedYear = window.MP_YEAR || defaultYear();
+    const [planMeta] = useState({ quarter: lockedQuarter, year: lockedYear });
     const [status, setStatus] = useState('idle');
     const [error, setError] = useState(null);
     const [savedAt, setSavedAt] = useState(null);
@@ -505,10 +483,8 @@
           <SubmitterBlock
             planKey={planKey}
             personalKey={personalKey}
-            quarter={planMeta.quarter}
             year={planMeta.year}
-            entryCount={entryCount}
-            onChange={(patch) => setPlanMeta((cur) => ({ ...cur, ...patch }))} />,
+            entryCount={entryCount} />,
           submitterMount
         )}
         <LiveBar

@@ -49,6 +49,10 @@
   // Used when no ?plan= URL parameter is provided.
   window.MP_DEFAULT_PLAN = "default";
 
+  // The fiscal year this page is for. Each plan_key holds ONE row per year.
+  // If your existing data was saved under a different year, set it to match (e.g. "25-26").
+  window.MP_YEAR = "25-26";
+
   // Optional: if you set WRITE_SECRET in the Apps Script Script Properties,
   // put the same value here so this page can read/write. Leave blank to skip.
   window.MP_WRITE_SECRET = "";
