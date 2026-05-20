@@ -26,10 +26,10 @@ window.MP = (() => {
   ];
 
   const VALUES_INTRO_MINISTRY =
-    'Start with the value behind what you\u2019re doing. Set the less-tangible goals here. Some prompts: \u201cWhat do I want everyone to know after engaging with my ministry?\u201d \u201cWhy would people care about what we\u2019re doing this year?\u201d \u201cWhat new data do I want to integrate into everything I do?\u201d';
+    'Set the less-tangible goals here. Some prompts: \u201cWhat do I want everyone to know after engaging with my ministry?\u201d \u201cWhy would people care about what we\u2019re doing this year?\u201d \u201cWhat new data do I want to integrate into everything I do?\u201d';
 
   const VALUES_INTRO_DEPARTMENT =
-    'Start with the value behind what you\u2019re doing. Set the less-tangible goals here. Some prompts: \u201cWhat do I want our volunteers to know matters?\u201d \u201cHow do we want to stand out?\u201d \u201cWhat new data do I want to integrate into everything I do?\u201d';
+    'Set the less-tangible goals here. Some prompts: \u201cWhat do I want our volunteers to know matters?\u201d \u201cHow do we want to stand out?\u201d \u201cWhat new data do I want to integrate into everything I do?\u201d';
 
   // Values rows are now dynamic — users add/remove them. No row title.
   const VALUES_COLS = [
