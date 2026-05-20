@@ -22,8 +22,8 @@
 
   const Area = ({ rows = 3, placeholder, on = 'paper', style, col, row }) =>
   <textarea className={'mp-area' + (on === 'dark' ? ' on-dark' : '')} rows={rows} placeholder={placeholder}
-    data-mp-col={col} data-mp-row={row}
-    style={style} />;
+  data-mp-col={col} data-mp-row={row}
+  style={style} />;
 
 
   /* ---------- chapter divider ---------- */
@@ -31,27 +31,27 @@
     const len = (title || '').length;
     const titleFontSize = len > 38 ? 44 : len > 28 ? 60 : len > 20 ? 78 : 96;
     return (
-  <section style={{
-    margin: '64px -64px 0',
-    background: 'var(--ink)',
-    color: 'var(--paper)',
-    padding: '56px 64px 64px',
-    position: 'relative',
-    overflow: 'hidden'
-  }}>
+      <section style={{
+        margin: '64px -64px 0',
+        background: 'var(--ink)',
+        color: 'var(--paper)',
+        padding: '56px 64px 64px',
+        position: 'relative',
+        overflow: 'hidden'
+      }}>
       <div style={{
-      position: 'absolute',
-      right: -40,
-      top: -80,
-      fontFamily: 'Montserrat',
-      fontWeight: 900,
-      fontSize: 460,
-      lineHeight: 0.8,
-      letterSpacing: '-0.05em',
-      color: 'rgba(184,117,74,0.18)',
-      zIndex: 0,
-      userSelect: 'none'
-    }}>{num}</div>
+          position: 'absolute',
+          right: -40,
+          top: -80,
+          fontFamily: 'Montserrat',
+          fontWeight: 900,
+          fontSize: 460,
+          lineHeight: 0.8,
+          letterSpacing: '-0.05em',
+          color: 'rgba(184,117,74,0.18)',
+          zIndex: 0,
+          userSelect: 'none'
+        }}>{num}</div>
       <div style={{ position: 'relative', zIndex: 1 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 18 }}>
           <span style={{ width: 36, height: 2, background: 'var(--accent)' }} />
@@ -61,10 +61,10 @@
           {title}
         </h2>
         {mark &&
-      <div style={{ marginTop: 22, fontFamily: 'Montserrat', fontWeight: 500, fontSize: 14, lineHeight: 1.6, color: 'rgba(244,237,225,0.65)', maxWidth: 620 }}>
+          <div style={{ marginTop: 22, fontFamily: 'Montserrat', fontWeight: 500, fontSize: 14, lineHeight: 1.6, color: 'rgba(244,237,225,0.65)', maxWidth: 620 }}>
             {mark}
           </div>
-      }
+          }
       </div>
     </section>);
   };
@@ -160,16 +160,16 @@
     return (
       <div style={{ marginBottom: 8 }}>
         <input ref={inputRef} type="text"
-          data-mp-row={'five.' + scale}
-          data-mp-col={'Q' + qNum}
-          style={{ position: 'absolute', width: 1, height: 1, opacity: 0, pointerEvents: 'none' }}
-          tabIndex={-1} aria-hidden="true" readOnly />
+        data-mp-row={'five.' + scale}
+        data-mp-col={'Q' + qNum}
+        style={{ position: 'absolute', width: 1, height: 1, opacity: 0, pointerEvents: 'none' }}
+        tabIndex={-1} aria-hidden="true" readOnly />
         <div style={{
           fontFamily: 'Montserrat', fontWeight: 800, fontSize: 9, letterSpacing: '0.14em',
-          textTransform: 'uppercase', color: 'var(--ink-soft)', marginBottom: 3, lineHeight: 1.2,
+          textTransform: 'uppercase', color: 'var(--ink-soft)', marginBottom: 3, lineHeight: 1.2
         }}>{scale}</div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(10, 1fr)', gap: 2 }}>
-          {[1,2,3,4,5,6,7,8,9,10].map((n) => {
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => {
             const active = value === String(n);
             return (
               <button key={n} type="button" onClick={() => select(n)} className="mp-print-hide" style={{
@@ -177,18 +177,18 @@
                 color: active ? 'var(--paper)' : 'var(--ink)',
                 border: '1px solid var(--ink)',
                 fontFamily: 'Montserrat', fontWeight: 700, fontSize: 9,
-                padding: 0, height: 18, lineHeight: 1, cursor: 'pointer',
-              }}>{n}</button>
-            );
+                padding: 0, height: 18, lineHeight: 1, cursor: 'pointer'
+              }}>{n}</button>);
+
           })}
         </div>
         {/* Print-only display of the chosen value */}
         <div style={{ display: 'none' }} className="mp-print-only" />
-      </div>
-    );
+      </div>);
+
   };
   const ScaleCell = ({ qNum }) =>
-    <div>
+  <div>
       {C.PERSONAL_FIVE_SCALES.map((s) => <ScaleRow key={s} scale={s} qNum={qNum} />)}
     </div>;
 
@@ -204,37 +204,37 @@
         borderRight: i === 3 ? 'none' : dark ? '1px solid rgba(184,117,74,0.4)' : '1px solid var(--ink)',
         background: dark ? 'rgba(184,117,74,0.18)' : 'var(--paper-2)'
       }}>
-            <div style={{ fontFamily: 'Montserrat', fontWeight: 900, fontSize: 13, letterSpacing: '0.02em', lineHeight: 1.2, color: dark ? 'var(--paper)' : 'var(--ink)', textTransform: 'uppercase' }}>{(dateLabels && dateLabels[i]) || ('Q' + q.n)}</div>
-            {(subLabels && subLabels[i]) && <div style={{ fontFamily: 'Montserrat', fontWeight: 700, fontSize: 9, letterSpacing: '0.14em', lineHeight: 1.4, color: 'var(--accent)', textTransform: 'uppercase', marginTop: 4 }}>{subLabels[i]}</div>}
+            <div style={{ fontFamily: 'Montserrat', fontWeight: 900, fontSize: 13, letterSpacing: '0.02em', lineHeight: 1.2, color: dark ? 'var(--paper)' : 'var(--ink)', textTransform: 'uppercase' }}>{dateLabels && dateLabels[i] || 'Q' + q.n}</div>
+            {subLabels && subLabels[i] && <div style={{ fontFamily: 'Montserrat', fontWeight: 700, fontSize: 9, letterSpacing: '0.14em', lineHeight: 1.4, color: 'var(--accent)', textTransform: 'uppercase', marginTop: 4 }}>{subLabels[i]}</div>}
           </div>
       )}
         {C.PERSONAL_PROMPTS.map((p, ri) => {
-          const isFiveScales = ri === 0;
-          return (
-            <React.Fragment key={p}>
+        const isFiveScales = ri === 0;
+        return (
+          <React.Fragment key={p}>
               <div style={{
-                padding: '16px',
-                borderTop: dark ? '1px solid rgba(184,117,74,0.4)' : '1px solid var(--ink)',
-                borderRight: dark ? '1px solid rgba(184,117,74,0.4)' : '1px solid var(--ink)',
-                minHeight: isFiveScales ? 220 : 110,
-              }}>
+              padding: '16px',
+              borderTop: dark ? '1px solid rgba(184,117,74,0.4)' : '1px solid var(--ink)',
+              borderRight: dark ? '1px solid rgba(184,117,74,0.4)' : '1px solid var(--ink)',
+              minHeight: isFiveScales ? 220 : 110
+            }}>
                 <span style={{ fontFamily: 'Montserrat', fontWeight: 800, fontSize: 13, lineHeight: 1.4, color: dark ? 'var(--paper)' : 'var(--ink)' }}>{p}</span>
               </div>
               {[0, 1, 2, 3].map((ci) =>
-                <div key={ci} data-mp-row={p} data-mp-col={'Q' + (ci + 1)} style={{
-                  padding: isFiveScales ? '12px 10px' : 12,
-                  borderTop: dark ? '1px solid rgba(184,117,74,0.4)' : '1px solid var(--ink)',
-                  borderRight: ci === 3 ? 'none' : dark ? '1px solid rgba(184,117,74,0.4)' : '1px solid var(--ink)',
-                  minHeight: isFiveScales ? 220 : 110,
-                }}>
-                  {isFiveScales
-                    ? <ScaleCell qNum={ci + 1} />
-                    : <Area rows={4} on={dark ? 'dark' : 'paper'} row={p} col={'Q' + (ci + 1)} />}
+            <div key={ci} data-mp-row={p} data-mp-col={'Q' + (ci + 1)} style={{
+              padding: isFiveScales ? '12px 10px' : 12,
+              borderTop: dark ? '1px solid rgba(184,117,74,0.4)' : '1px solid var(--ink)',
+              borderRight: ci === 3 ? 'none' : dark ? '1px solid rgba(184,117,74,0.4)' : '1px solid var(--ink)',
+              minHeight: isFiveScales ? 220 : 110
+            }}>
+                  {isFiveScales ?
+              <ScaleCell qNum={ci + 1} /> :
+              <Area rows={4} on={dark ? 'dark' : 'paper'} row={p} col={'Q' + (ci + 1)} />}
                 </div>
-              )}
-            </React.Fragment>
-          );
-        })}
+            )}
+            </React.Fragment>);
+
+      })}
       </div>
     </div>;
 
@@ -245,33 +245,33 @@
     return (
       <div data-mp-region="values">
         {Array.from({ length: rows }).map((_, ri) =>
-          <div key={ri} style={{ marginBottom: 24, borderTop: '3px solid var(--ink)', paddingTop: 16, position: 'relative' }}>
+        <div key={ri} style={{ marginBottom: 24, borderTop: '3px solid var(--ink)', paddingTop: 16, position: 'relative' }}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 0, border: '1.5px solid var(--ink)' }} data-mp-row={String(ri)}>
               {C.VALUES_COLS.map((col, ci) =>
-                <div key={col} data-mp-col={col} style={{
-                  padding: '14px 14px 18px',
-                  minHeight: 170,
-                  borderRight: ci === 3 ? 'none' : '1px solid var(--ink)',
-                  background: ci % 2 ? 'transparent' : 'rgba(29,39,51,0.04)'
-                }}>
+            <div key={col} data-mp-col={col} style={{
+              padding: '14px 14px 18px',
+              minHeight: 170,
+              borderRight: ci === 3 ? 'none' : '1px solid var(--ink)',
+              background: ci % 2 ? 'transparent' : 'rgba(29,39,51,0.04)'
+            }}>
                   <Tag>{col}</Tag>
                   <div style={{ borderBottom: '1.5px solid var(--ink)', marginBottom: 10 }} />
                   <Area rows={5} row={String(ri)} col={col} />
                 </div>
-              )}
+            )}
             </div>
             {rows > 1 && ri === rows - 1 &&
-              <button
-                onClick={removeRow}
-                className="mp-print-hide"
-                title="Remove last value"
-                style={{
-                  position: 'absolute', top: 10, right: 0,
-                  width: 22, height: 22, border: 'none', background: 'transparent',
-                  color: 'var(--ink-soft)', fontFamily: 'Montserrat',
-                  fontWeight: 700, fontSize: 16, cursor: 'pointer', lineHeight: 1,
-                }}>×</button>
-            }
+          <button
+            onClick={removeRow}
+            className="mp-print-hide"
+            title="Remove last value"
+            style={{
+              position: 'absolute', top: 10, right: 0,
+              width: 22, height: 22, border: 'none', background: 'transparent',
+              color: 'var(--ink-soft)', fontFamily: 'Montserrat',
+              fontWeight: 700, fontSize: 16, cursor: 'pointer', lineHeight: 1
+            }}>×</button>
+          }
           </div>
         )}
         <button
@@ -282,71 +282,71 @@
             background: 'transparent', border: '2px dashed var(--ink)', cursor: 'pointer',
             fontFamily: 'Montserrat', fontWeight: 900, fontSize: 11,
             letterSpacing: '0.22em', textTransform: 'uppercase', color: 'var(--ink)',
-            display: 'inline-flex', alignItems: 'center', gap: 10,
+            display: 'inline-flex', alignItems: 'center', gap: 10
           }}
           onMouseOver={(e) => {e.currentTarget.style.background = 'var(--ink)';e.currentTarget.style.color = 'var(--paper)';}}
           onMouseOut={(e) => {e.currentTarget.style.background = 'transparent';e.currentTarget.style.color = 'var(--ink)';}}>
-          <span style={{ fontSize: 18, lineHeight: 1 }}>+</span> Add value
+          <span style={{ fontSize: 18, lineHeight: 1 }}>+</span> Add statement
         </button>
-      </div>
-    );
+      </div>);
+
   };
 
 
   const FiveBlock = ({ questions }) =>
   <div data-mp-region="five">
       {questions.map((q, i) =>
-      <div key={i} data-mp-row={'Q' + (i + 1)} style={{ display: 'grid', gridTemplateColumns: '60px 1fr', borderBottom: '1.5px solid var(--ink)', padding: '18px 0' }}>
+    <div key={i} data-mp-row={'Q' + (i + 1)} style={{ display: 'grid', gridTemplateColumns: '60px 1fr', borderBottom: '1.5px solid var(--ink)', padding: '18px 0' }}>
           <div style={{ fontFamily: 'Montserrat', fontWeight: 900, fontSize: 28, color: 'var(--accent)', lineHeight: 1 }}>0{i + 1}</div>
           <div data-mp-col="answer">
             <h5 style={{ margin: '0 0 10px', fontFamily: 'Montserrat', fontWeight: 800, fontSize: 16, color: 'var(--ink)', lineHeight: 1.35 }}>{q}</h5>
             <Area rows={3} row={'Q' + (i + 1)} col="answer" />
           </div>
         </div>
-      )}
+    )}
     </div>;
 
 
   const GoalRow = ({ cat, idx, columnMap }) =>
   <div data-mp-row={cat} style={{ display: 'grid', gridTemplateColumns: '200px 1.1fr 1.1fr 1.1fr 110px 1.4fr', borderTop: idx === 0 ? '3px solid var(--ink)' : '1px solid var(--ink)', minHeight: 140 }}>
       <div style={{ padding: '18px 18px', background: 'var(--ink)', color: 'var(--paper)', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start' }}>
-        <div style={{ fontFamily: 'Montserrat', fontWeight: 900, fontSize: 11, letterSpacing: '0.2em', color: 'var(--accent)', marginBottom: 4 }}>0{idx + 1}</div>
+        <div style={{ fontFamily: 'Montserrat', fontWeight: 900, fontSize: 11, letterSpacing: '0.2em', color: 'var(--accent)', marginBottom: 4 }}>VALUE:</div>
         <div style={{ fontFamily: 'Montserrat', fontWeight: 900, fontSize: 18, letterSpacing: 0, textTransform: 'uppercase', lineHeight: 1.05 }}>{cat}</div>
       </div>
       {['Goal', 'Why does this matter?', 'Tracking for success', 'Quarter', 'Action steps'].map((col, ci) => {
-        const key = (columnMap || {})[col] || col.toLowerCase().split(' ')[0];
-        return (
+      const key = (columnMap || {})[col] || col.toLowerCase().split(' ')[0];
+      return (
         <div key={col} data-mp-col={key} style={{ padding: '14px 14px', borderLeft: '1px solid var(--ink)' }}>
           <Tag>{col}</Tag>
           {col === 'Quarter' ?
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px 6px', marginTop: 8 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px 6px', marginTop: 8 }}>
               {[1, 2, 3, 4].map((q) =>
-        <label key={q} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: 'Montserrat', fontWeight: 700, fontSize: 11, color: 'var(--ink)', cursor: 'pointer' }}>
+            <label key={q} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: 'Montserrat', fontWeight: 700, fontSize: 11, color: 'var(--ink)', cursor: 'pointer' }}>
                   <input type="checkbox" data-mp-row={cat} data-mp-col="quarters" style={{
-            appearance: 'none',
-            WebkitAppearance: 'none',
-            width: 14,
-            height: 14,
-            margin: 0,
-            border: '1.5px solid var(--ink)',
-            borderRadius: 0,
-            background: 'transparent',
-            cursor: 'pointer',
-            position: 'relative',
-            flexShrink: 0
-          }} onChange={(e) => {
-            e.target.style.background = e.target.checked ? 'var(--ink)' : 'transparent';
-          }} />
+                appearance: 'none',
+                WebkitAppearance: 'none',
+                width: 14,
+                height: 14,
+                margin: 0,
+                border: '1.5px solid var(--ink)',
+                borderRadius: 0,
+                background: 'transparent',
+                cursor: 'pointer',
+                position: 'relative',
+                flexShrink: 0
+              }} onChange={(e) => {
+                e.target.style.background = e.target.checked ? 'var(--ink)' : 'transparent';
+              }} />
                   Q{q}
                 </label>
-        )}
+            )}
             </div> :
 
-      <Area rows={4} row={cat} col={key} />
-      }
-        </div>
-      );
-      })}
+          <Area rows={4} row={cat} col={key} />
+          }
+        </div>);
+
+    })}
     </div>;
 
 
@@ -391,18 +391,18 @@
                   resize: 'none',
                   overflow: 'hidden',
                   overflowWrap: 'break-word',
-                  wordBreak: 'break-word',
+                  wordBreak: 'break-word'
                 }} />
               </div>
               {C.TEAM_COLS.map((col, ci) => {
               const colKeys = ['current', 'goal', 'priority', 'actions'];
               const key = colKeys[ci];
               return (
-            <div key={ci} data-mp-col={key} style={{ padding: '14px', borderLeft: '1px solid var(--ink)', minHeight: 110 }}>
+                <div key={ci} data-mp-col={key} style={{ padding: '14px', borderLeft: '1px solid var(--ink)', minHeight: 110 }}>
                   <Area rows={3} row={team} col={key} />
-                </div>
-              );
-              })}
+                </div>);
+
+            })}
               <div style={{
               borderLeft: '1px solid var(--ink)',
               display: 'flex',
@@ -469,39 +469,39 @@
         <div style={{ border: '3px solid var(--ink)' }}>
           <div style={{ display: 'grid', gridTemplateColumns: gridCols, background: 'var(--ink)', color: 'var(--paper)' }}>
             {C.METRICS_COLS.map((col, i) =>
-              <div key={col} style={{ padding: '12px 12px', borderLeft: i === 0 ? 'none' : '1px solid rgba(184,117,74,0.5)', fontFamily: 'Montserrat', fontWeight: 900, fontSize: 10, letterSpacing: '0.16em', textTransform: 'uppercase', lineHeight: 1.4 }}>
+            <div key={col} style={{ padding: '12px 12px', borderLeft: i === 0 ? 'none' : '1px solid rgba(184,117,74,0.5)', fontFamily: 'Montserrat', fontWeight: 900, fontSize: 10, letterSpacing: '0.16em', textTransform: 'uppercase', lineHeight: 1.4 }}>
                 {col}
               </div>
             )}
             <div style={{ borderLeft: '1px solid rgba(184,117,74,0.5)' }} />
           </div>
           {Array.from({ length: rows }).map((_, ri) =>
-            <div key={ri} data-mp-row={String(ri)} style={{ display: 'grid', gridTemplateColumns: gridCols, borderTop: '1px solid var(--ink)', background: ri % 2 ? 'rgba(29,39,51,0.04)' : 'transparent' }}>
+          <div key={ri} data-mp-row={String(ri)} style={{ display: 'grid', gridTemplateColumns: gridCols, borderTop: '1px solid var(--ink)', background: ri % 2 ? 'rgba(29,39,51,0.04)' : 'transparent' }}>
               {C.METRICS_COLS.map((_, ci) =>
-                <div key={ci} data-mp-col={colKeys[ci]} style={{ padding: 12, borderLeft: ci === 0 ? 'none' : '1px solid var(--ink)', minHeight: 72 }}>
+            <div key={ci} data-mp-col={colKeys[ci]} style={{ padding: 12, borderLeft: ci === 0 ? 'none' : '1px solid var(--ink)', minHeight: 72 }}>
                   <Area rows={2} row={String(ri)} col={colKeys[ci]} />
                 </div>
-              )}
+            )}
               <div className="mp-print-hide" style={{ borderLeft: '1px solid var(--ink)', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', paddingTop: 10 }}>
                 {ri === rows - 1 && rows > 1 &&
-                  <button
-                    onClick={removeRow}
-                    title="Remove last row"
-                    style={{
-                      width: 22,
-                      height: 22,
-                      border: 'none',
-                      background: 'transparent',
-                      color: 'var(--ink-soft)',
-                      fontFamily: 'Montserrat',
-                      fontWeight: 700,
-                      fontSize: 16,
-                      cursor: 'pointer',
-                      lineHeight: 1,
-                    }}>
+              <button
+                onClick={removeRow}
+                title="Remove last row"
+                style={{
+                  width: 22,
+                  height: 22,
+                  border: 'none',
+                  background: 'transparent',
+                  color: 'var(--ink-soft)',
+                  fontFamily: 'Montserrat',
+                  fontWeight: 700,
+                  fontSize: 16,
+                  cursor: 'pointer',
+                  lineHeight: 1
+                }}>
                     ×
                   </button>
-                }
+              }
               </div>
             </div>
           )}
@@ -523,10 +523,10 @@
             color: 'var(--ink)',
             display: 'inline-flex',
             alignItems: 'center',
-            gap: 10,
+            gap: 10
           }}
-          onMouseOver={(e) => { e.currentTarget.style.background = 'var(--ink)'; e.currentTarget.style.color = 'var(--paper)'; }}
-          onMouseOut={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--ink)'; }}>
+          onMouseOver={(e) => {e.currentTarget.style.background = 'var(--ink)';e.currentTarget.style.color = 'var(--paper)';}}
+          onMouseOut={(e) => {e.currentTarget.style.background = 'transparent';e.currentTarget.style.color = 'var(--ink)';}}>
           <span style={{ fontSize: 18, lineHeight: 1 }}>+</span> Add metric
         </button>
       </div>);
@@ -536,21 +536,21 @@
   <div data-mp-region="programming" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 0, border: '3px solid var(--ink)' }}>
       {C.PROGRAMMING_QUESTIONS.map((q, i) => {
       const keys = ['stop', 'change', 'add', 'challenges'];
-      const key = keys[i] || ('q' + (i + 1));
+      const key = keys[i] || 'q' + (i + 1);
       return (
-    <div key={i} data-mp-row={key} style={{
-      padding: '20px 22px 22px',
-      borderRight: i % 2 === 0 ? '1.5px solid var(--ink)' : 'none',
-      borderBottom: i < 2 ? '1.5px solid var(--ink)' : 'none'
-    }}>
+        <div key={i} data-mp-row={key} style={{
+          padding: '20px 22px 22px',
+          borderRight: i % 2 === 0 ? '1.5px solid var(--ink)' : 'none',
+          borderBottom: i < 2 ? '1.5px solid var(--ink)' : 'none'
+        }}>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 10 }}>
             <span style={{ fontFamily: 'Montserrat', fontWeight: 900, fontSize: 36, color: 'var(--accent)', lineHeight: 0.9 }}>0{i + 1}</span>
             <h5 style={{ margin: 0, fontFamily: 'Montserrat', fontWeight: 800, fontSize: 14, color: 'var(--ink)', lineHeight: 1.35 }}>{q}</h5>
           </div>
           <Area rows={4} row={key} col="answer" />
-        </div>
-      );
-      })}
+        </div>);
+
+    })}
     </div>;
 
 
@@ -561,7 +561,7 @@
         <div className="mp-print-hide" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(4, 1fr)',
-          marginBottom: 14,
+          marginBottom: 14
         }}>
           {C.QUARTERS.map((qq, i) => {
             const isActive = active === qq.n;
@@ -582,7 +582,7 @@
                   display: 'flex',
                   flexDirection: 'column',
                   gap: 4,
-                  transition: 'background 120ms ease, color 120ms ease',
+                  transition: 'background 120ms ease, color 120ms ease'
                 }}
                 onMouseOver={(e) => {
                   if (!isActive) {
@@ -599,25 +599,25 @@
                   fontSize: 9,
                   fontWeight: 700,
                   letterSpacing: '0.18em',
-                  opacity: isActive ? 0.75 : 0.6,
+                  opacity: isActive ? 0.75 : 0.6
                 }}>
                   {qq.months.join(' · ')}
                 </span>
-              </button>
-            );
+              </button>);
+
           })}
         </div>
         {C.QUARTERS.map((qq) =>
-          <div
-            key={qq.n}
-            className="mp-quarter-panel"
-            data-active={active === qq.n ? 'true' : 'false'}
-            style={{ display: active === qq.n ? 'block' : 'none' }}>
+        <div
+          key={qq.n}
+          className="mp-quarter-panel"
+          data-active={active === qq.n ? 'true' : 'false'}
+          style={{ display: active === qq.n ? 'block' : 'none' }}>
             <QuarterCalendar q={qq} />
           </div>
         )}
-      </div>
-    );
+      </div>);
+
   };
 
   const QuarterCalendar = ({ q }) =>
@@ -754,47 +754,47 @@
         fontSize: 12,
         letterSpacing: '0.04em',
         transition: 'background 120ms ease, color 120ms ease',
-        whiteSpace: 'nowrap',
+        whiteSpace: 'nowrap'
       }}>
-        {typeBadge && (
-          <span style={{
-            fontSize: 9, letterSpacing: '0.18em', fontWeight: 900,
-            padding: '2px 5px', border: '1px solid currentColor',
-            opacity: active ? 0.65 : 0.55,
-          }}>{typeBadge}</span>
-        )}
-        {editable ? (
-          <input
-            type="text"
-            value={label}
-            placeholder={placeholder || 'Untitled'}
-            onChange={(e) => onRename(e.target.value)}
-            onClick={(e) => e.stopPropagation()}
-            spellCheck={false}
-            style={{
-              background: 'transparent', border: 'none', outline: 'none',
-              color: 'inherit', fontFamily: 'inherit', fontWeight: 'inherit',
-              fontSize: 'inherit', letterSpacing: 'inherit', padding: 0,
-              width: Math.max(8, (label || placeholder || 'Untitled').length) + 'ch',
-              maxWidth: 200,
-            }}
-          />
-        ) : (
-          <span>{label}</span>
-        )}
-        {onRemove && (
-          <button
-            onClick={(e) => { e.stopPropagation(); if (confirm('Remove this tab and all its data?')) onRemove(); }}
-            title="Remove"
-            className="mp-print-hide"
-            style={{
-              background: 'transparent', border: 'none', cursor: 'pointer',
-              color: 'inherit', opacity: 0.45, fontSize: 14, lineHeight: 1,
-              padding: '0 2px', marginLeft: 2,
-            }}>×</button>
-        )}
-      </div>
-    );
+        {typeBadge &&
+        <span style={{
+          fontSize: 9, letterSpacing: '0.18em', fontWeight: 900,
+          padding: '2px 5px', border: '1px solid currentColor',
+          opacity: active ? 0.65 : 0.55
+        }}>{typeBadge}</span>
+        }
+        {editable ?
+        <input
+          type="text"
+          value={label}
+          placeholder={placeholder || 'Untitled'}
+          onChange={(e) => onRename(e.target.value)}
+          onClick={(e) => e.stopPropagation()}
+          spellCheck={false}
+          style={{
+            background: 'transparent', border: 'none', outline: 'none',
+            color: 'inherit', fontFamily: 'inherit', fontWeight: 'inherit',
+            fontSize: 'inherit', letterSpacing: 'inherit', padding: 0,
+            width: Math.max(8, (label || placeholder || 'Untitled').length) + 'ch',
+            maxWidth: 200
+          }} /> :
+
+
+        <span>{label}</span>
+        }
+        {onRemove &&
+        <button
+          onClick={(e) => {e.stopPropagation();if (confirm('Remove this tab and all its data?')) onRemove();}}
+          title="Remove"
+          className="mp-print-hide"
+          style={{
+            background: 'transparent', border: 'none', cursor: 'pointer',
+            color: 'inherit', opacity: 0.45, fontSize: 14, lineHeight: 1,
+            padding: '0 2px', marginLeft: 2
+          }}>×</button>
+        }
+      </div>);
+
   };
 
   const TabBar = ({ entries, activeId, setActiveId, addEntry, removeEntry, updateEntry, showPersonal }) => {
@@ -809,40 +809,40 @@
         alignItems: 'center',
         gap: 0,
         flexWrap: 'wrap',
-        rowGap: 4,
+        rowGap: 4
       }}>
         <div style={{
           fontFamily: 'Montserrat', fontWeight: 900, fontSize: 10,
           letterSpacing: '0.28em', color: 'var(--accent)',
-          textTransform: 'uppercase', marginRight: 14, padding: '8px 0',
+          textTransform: 'uppercase', marginRight: 14, padding: '8px 0'
         }}>Plan ·</div>
-        {showPersonal && (
-          <Tab
-            active={activeId === 'personal'}
-            onClick={() => setActiveId('personal')}
-            label="Personal"
-            type="personal" />
+        {showPersonal &&
+        <Tab
+          active={activeId === 'personal'}
+          onClick={() => setActiveId('personal')}
+          label="Personal"
+          type="personal" />
+        }
+        {entries.map((entry) =>
+        <Tab
+          key={entry.id}
+          active={activeId === entry.id}
+          onClick={() => setActiveId(entry.id)}
+          label={entry.name}
+          placeholder={entry.type === 'ministry' ? 'Ministry name' : 'Department name'}
+          type={entry.type}
+          editable
+          onRename={(name) => updateEntry(entry.id, { name })}
+          onRemove={() => removeEntry(entry.id)} />
         )}
-        {entries.map(entry => (
-          <Tab
-            key={entry.id}
-            active={activeId === entry.id}
-            onClick={() => setActiveId(entry.id)}
-            label={entry.name}
-            placeholder={entry.type === 'ministry' ? 'Ministry name' : 'Department name'}
-            type={entry.type}
-            editable
-            onRename={(name) => updateEntry(entry.id, { name })}
-            onRemove={() => removeEntry(entry.id)} />
-        ))}
         <button onClick={() => addEntry('ministry')} className="mp-print-hide" style={tabbarAddBtnStyle}>
           + Ministry
         </button>
         <button onClick={() => addEntry('department')} className="mp-print-hide" style={tabbarAddBtnStyle}>
           + Department
         </button>
-      </div>
-    );
+      </div>);
+
   };
 
   const tabbarAddBtnStyle = {
@@ -856,48 +856,46 @@
     letterSpacing: '0.18em',
     textTransform: 'uppercase',
     color: 'var(--accent)',
-    marginLeft: 6,
+    marginLeft: 6
   };
 
   /* ---------- Entry panel (one ministry or department) ---------- */
   const EntryPanel = ({ entry, updateEntry }) => {
     const isMinistry = entry.type === 'ministry';
     let letterIdx = 0;
-    const L = () => String.fromCharCode(65 + (letterIdx++)) + '.';
+    const L = () => String.fromCharCode(65 + letterIdx++) + '.';
 
     return (
       <React.Fragment>
-        <ChapterSpread num="01" kicker={`Part One · ${entry.type === 'ministry' ? 'Ministry' : 'Department'}`} title={entry.name || (isMinistry ? 'Untitled Ministry' : 'Untitled Department')} mark={isMinistry
-          ? "Values and the metrics behind them, strategic goals, The Five, and your teams — the shape of what you'll lead this year."
-          : "Values, the metrics behind them, The Five, and your teams — the shape of what this department will lead this year."} />
+        <ChapterSpread num="01" kicker={`Part One · ${entry.type === 'ministry' ? 'Ministry' : 'Department'}`} title={entry.name || (isMinistry ? 'Untitled Ministry' : 'Untitled Department')} mark={isMinistry ?
+        "Values and the metrics behind them, strategic goals, The Five, and your teams — the shape of what you'll lead this year." :
+        "Values, the metrics behind them, The Five, and your teams — the shape of what this department will lead this year."} />
         <Paper>
-          <Sub count={L()} intro={isMinistry ? C.VALUES_INTRO_MINISTRY : C.VALUES_INTRO_DEPARTMENT}>Values</Sub>
+          <Sub count={L()} intro={isMinistry ? C.VALUES_INTRO_MINISTRY : C.VALUES_INTRO_DEPARTMENT}>Core Statements</Sub>
           <Values rows={entry.valuesRows} setRows={(n) => updateEntry({ valuesRows: typeof n === 'function' ? n(entry.valuesRows) : n })} />
-          <div style={{ marginTop: 10, padding: '12px 18px', background: 'var(--ink)', color: 'var(--accent)', fontFamily: 'Montserrat', fontWeight: 800, fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase' }}>
-            These values inform every other section that follows.
+          <div style={{ marginTop: 10, padding: '12px 18px', background: 'var(--ink)', color: 'var(--accent)', fontFamily: 'Montserrat', fontWeight: 800, fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase' }}>THESE STATEMENTS INFORM EVERY OTHER SECTION THAT FOLLOWS.
+
           </div>
 
-          <Sub count={L()} intro={isMinistry
-            ? "Track attendance, baptisms, prayer visits, email opens, money spent on consultants — whatever signals success. Knowing where you are now is what makes the goals below meaningful."
-            : "Track whatever signals success for this department — output, response times, costs, satisfaction, whatever you measure. Knowing where you are now is what makes the goals below meaningful."}>Tracking Metrics</Sub>
+          <Sub count={L()} intro={isMinistry ?
+          "Track attendance, baptisms, prayer visits, email opens, money spent on consultants — whatever signals success. Knowing where you are now is what makes the goals below meaningful." :
+          "Track whatever signals success for this department — output, response times, costs, satisfaction, whatever you measure. Knowing where you are now is what makes the goals below meaningful."}>Tracking Metrics</Sub>
           <MetricsBlock rows={entry.metricsRows} setRows={(n) => updateEntry({ metricsRows: typeof n === 'function' ? n(entry.metricsRows) : n })} />
 
-          {isMinistry && <React.Fragment>
-            <Sub count={L()} intro="Three categories — same shape, different weight. Plan something fun, something risky, and something excellent this year.">Top Strategic Goals</Sub>
-            <div data-mp-region="goals" style={{ border: '3px solid var(--ink)' }}>
-              {C.GOAL_CATEGORIES.map((cat, i) => <GoalRow key={cat} cat={cat} idx={i} columnMap={{'Goal':'goal','Why does this matter?':'why','Tracking for success':'tracking','Quarter':'quarters','Action steps':'actions'}} />)}
-            </div>
-          </React.Fragment>}
+          <Sub count={L()} intro="We spend One Hour a Day with Jesus through reading, prayer, and worship through music. This creates the foundation we stand on.">Our Values in Action</Sub>
+          <div data-mp-region="goals" style={{ border: '3px solid var(--ink)' }}>
+            {C.GOAL_CATEGORIES.map((cat, i) => <GoalRow key={cat} cat={cat} idx={i} columnMap={{ 'Goal': 'goal', 'Why does this matter?': 'why', 'Tracking for success': 'tracking', 'Quarter': 'quarters', 'Action steps': 'actions' }} />)}
+          </div>
 
           <Sub count={L()} intro={C.FIVE_BLURB}>The Five</Sub>
           <FiveBlock questions={isMinistry ? C.FIVE_QUESTIONS_MINISTRY : C.FIVE_QUESTIONS_DEPARTMENT} />
 
-          <Sub count={L()} intro="Add a row for each team you want to track independently — volunteers, leaders, worship, hospitality, whoever.">Team Growth</Sub>
+          <Sub count={L()} intro="Add a row for each team you want to track independently — volunteers, leaders, worship, hospitality, whoever."><React.Fragment>What we do:<br />Recruiting volunteers and leaders</React.Fragment></Sub>
           <TeamGrowth teams={entry.teams} setTeams={(t) => updateEntry({ teams: typeof t === 'function' ? t(entry.teams) : t })} />
 
-          <Sub count={L()}>Team Care</Sub>
+          <Sub count={L()}><React.Fragment>What we do:<br />Volunteer care, equipping, and communication</React.Fragment></Sub>
           <div data-mp-region="teamcare" style={{ border: '3px solid var(--ink)' }}>
-            {C.CARE_CATEGORIES.map((cat, i) => <GoalRow key={cat} cat={cat} idx={i} columnMap={{'Goal':'goal','Why does this matter?':'why','Tracking for success':'tracking','Quarter':'quarters','Action steps':'actions'}} />)}
+            {C.CARE_CATEGORIES.map((cat, i) => <GoalRow key={cat} cat={cat} idx={i} columnMap={{ 'Goal': 'goal', 'Why does this matter?': 'why', 'Tracking for success': 'tracking', 'Quarter': 'quarters', 'Action steps': 'actions' }} />)}
           </div>
 
           {isMinistry && <React.Fragment>
@@ -906,38 +904,38 @@
           </React.Fragment>}
         </Paper>
 
-        <ChapterSpread num="02" kicker="Part Two" title={isMinistry ? 'Calendaring' : 'Dept. Calendaring'} mark={isMinistry
-          ? "The calendar is where values, data, and goals become a year. Plan the shape first, then plan what you'll need to pull it off."
-          : "The calendar is where projects and deadlines line up across the year. Plot the year, then plan what you'll need to deliver."} />
+        <ChapterSpread num="02" kicker="Part Two" title={isMinistry ? 'Calendaring' : 'Dept. Calendaring'} mark={isMinistry ?
+        "The calendar is where values, data, and goals become a year. Plan the shape first, then plan what you'll need to pull it off." :
+        "The calendar is where projects and deadlines line up across the year. Plot the year, then plan what you'll need to deliver."} />
         <Paper>
-          <Sub count={L()} intro={isMinistry
-            ? "Based on the information above, write out a loose ministry calendar for the year. Q1 is open by default — click any quarter tab to flip to it."
-            : "Map out the projects, deadlines, and milestones for each month of the year. Q1 is open by default — click any quarter tab to flip to it."}>
+          <Sub count={L()} intro={isMinistry ?
+          "Based on the information above, write out a loose ministry calendar for the year. Q1 is open by default — click any quarter tab to flip to it." :
+          "Map out the projects, deadlines, and milestones for each month of the year. Q1 is open by default — click any quarter tab to flip to it."}>
             {isMinistry ? 'Big Picture Calendaring' : 'Projects + Deadlines'}
           </Sub>
           <QuarterCalendarTabs />
 
-          <Sub count={L()} intro={isMinistry
-            ? "Based on your calendar, what should you consider as you plan the details for this ministry year?"
-            : "Based on your projects and deadlines, what will you need to deliver them this year?"}>Resources Needed</Sub>
+          <Sub count={L()} intro={isMinistry ?
+          "Based on your calendar, what should you consider as you plan the details for this ministry year?" :
+          "Based on your projects and deadlines, what will you need to deliver them this year?"}>Resources Needed</Sub>
           <ResourcesBlock cols={isMinistry ? C.RESOURCES_COLS_MINISTRY : C.RESOURCES_COLS_DEPARTMENT} rows={entry.resourcesRows} setRows={(n) => updateEntry({ resourcesRows: typeof n === 'function' ? n(entry.resourcesRows) : n })} />
         </Paper>
-      </React.Fragment>
-    );
+      </React.Fragment>);
+
   };
 
   const PERSONAL_DATE_LABELS = [
-    'Start of the Year',
-    'End of Quarter 1',
-    'Mid Year',
-    'End of Quarter 3',
-  ];
+  'Start of the Year',
+  'End of Quarter 1',
+  'Mid Year',
+  'End of Quarter 3'];
+
   const PERSONAL_SUB_LABELS = [
-    'July',
-    'September',
-    'January',
-    'March',
-  ];
+  'July',
+  'September',
+  'January',
+  'March'];
+
 
   /* ---------- Personal panel (inline tab, separate plan key) ---------- */
   const PersonalPanelInline = ({ personalKey }) => {
@@ -946,26 +944,26 @@
     return (
       <React.Fragment>
         <ChapterSpread num="01" kicker="Part One · Personal" title="Personal Plan" mark="A plan starts with the person making it. These pages are for you — your soul, your joy, your weight, your growth — to be revisited four times this year." />
-        {needsSetup && (
-          <div className="mp-print-hide" style={{
-            margin: '0 -64px',
-            padding: '20px 64px',
-            background: 'rgba(184,117,74,0.12)',
-            borderBottom: '1px solid rgba(184,117,74,0.4)',
-            color: 'var(--ink)',
-            fontFamily: 'Montserrat',
-            fontSize: 12,
-            lineHeight: 1.6,
-          }}>
+        {needsSetup &&
+        <div className="mp-print-hide" style={{
+          margin: '0 -64px',
+          padding: '20px 64px',
+          background: 'rgba(184,117,74,0.12)',
+          borderBottom: '1px solid rgba(184,117,74,0.4)',
+          color: 'var(--ink)',
+          fontFamily: 'Montserrat',
+          fontSize: 12,
+          lineHeight: 1.6
+        }}>
             <strong style={{ fontWeight: 900, letterSpacing: '0.04em' }}>⚠ Personal section needs setup.</strong> This page is loading shared plan data only. To autosave personal reflections separately, the page URL needs a <code style={{ fontFamily: 'monospace' }}>?personal=YOUR-NAME</code> parameter (in addition to <code style={{ fontFamily: 'monospace' }}>?plan=...</code>).
           </div>
-        )}
+        }
         <Paper>
           <Sub intro="Each quarter, return to these five prompts. Be honest. The numbers below come back around in December, March, and June.">Personal Development</Sub>
           <Personal dateLabels={PERSONAL_DATE_LABELS} subLabels={PERSONAL_SUB_LABELS} />
         </Paper>
-      </React.Fragment>
-    );
+      </React.Fragment>);
+
   };
 
   /* ---------- the workbook ---------- */
@@ -977,7 +975,7 @@
     valuesRows: 1,
     metricsRows: 2,
     teams: ['Volunteers', 'Leaders'],
-    resourcesRows: 2,
+    resourcesRows: 2
   });
 
   const ContrastSpread = () => {
@@ -986,8 +984,8 @@
 
     // Personal tab: live mode reads ?personal= URL param; standalone always shows it.
     const personalKey = (() => {
-      try { return new URLSearchParams(window.location.search).get('personal') || ''; }
-      catch (e) { return ''; }
+      try {return new URLSearchParams(window.location.search).get('personal') || '';}
+      catch (e) {return '';}
     })();
     const isLive = !!window.MP_BACKEND_URL;
     const showPersonal = !isLive || !!personalKey || !!window.MP_INCLUDE_PERSONAL;
@@ -1002,8 +1000,8 @@
         const remaining = es.filter((e) => e.id !== id);
         // Move active away if needed
         if (activeId === id) {
-          if (remaining.length > 0) setActiveId(remaining[0].id);
-          else if (showPersonal) setActiveId('personal');
+          if (remaining.length > 0) setActiveId(remaining[0].id);else
+          if (showPersonal) setActiveId('personal');
         }
         return remaining;
       });
@@ -1019,7 +1017,7 @@
         entries, setEntries,
         activeId, setActiveId,
         personalKey,
-        addEntry, removeEntry, updateEntry,
+        addEntry, removeEntry, updateEntry
       };
       window.dispatchEvent(new Event('mp-state-ready'));
     }, [entries, activeId, personalKey, addEntry, removeEntry, updateEntry]);
@@ -1078,31 +1076,31 @@
           addEntry={addEntry}
           removeEntry={removeEntry}
           updateEntry={updateEntry}
-          showPersonal={showPersonal}
-        />
+          showPersonal={showPersonal} />
+        
 
         {/* Mount point for the live mp-live.jsx submitter block (quarter / year picker) */}
         <div id="mp-submitter-mount"></div>
 
         {/* Personal panel — always rendered (when shown) but display-toggled by active tab */}
-        {showPersonal && (
-          <div data-mp-personal-root style={{ display: activeId === 'personal' ? 'block' : 'none' }}>
+        {showPersonal &&
+        <div data-mp-personal-root style={{ display: activeId === 'personal' ? 'block' : 'none' }}>
             <PersonalPanelInline personalKey={personalKey} />
           </div>
-        )}
+        }
 
         {/* Entry panels — all rendered (so mp-live can snapshot) but display-toggled */}
         {entries.map((entry) =>
-          <div key={entry.id} data-mp-entry={entry.id} style={{ display: activeId === entry.id ? 'block' : 'none' }}>
+        <div key={entry.id} data-mp-entry={entry.id} style={{ display: activeId === entry.id ? 'block' : 'none' }}>
             <EntryPanel entry={entry} updateEntry={(patch) => updateEntry(entry.id, patch)} />
           </div>
         )}
 
         {/* Empty state — no entries, personal tab not active */}
-        {entries.length === 0 && activeId !== 'personal' && (
-          <div style={{ padding: '120px 64px', textAlign: 'center' }}>
+        {entries.length === 0 && activeId !== 'personal' &&
+        <div style={{ padding: '120px 64px', textAlign: 'center' }}>
             <div style={{ fontFamily: 'Montserrat', fontWeight: 800, fontSize: 11, letterSpacing: '0.28em', color: 'var(--accent)', textTransform: 'uppercase', marginBottom: 14 }}>Empty plan</div>
-            <h2 style={{ margin: '0 0 16px', fontFamily: 'Montserrat', fontWeight: 900, fontSize: 48, lineHeight: 1, letterSpacing: '-0.02em', color: 'var(--ink)', textTransform: 'uppercase' }}>Add a ministry<br/>or department</h2>
+            <h2 style={{ margin: '0 0 16px', fontFamily: 'Montserrat', fontWeight: 900, fontSize: 48, lineHeight: 1, letterSpacing: '-0.02em', color: 'var(--ink)', textTransform: 'uppercase' }}>Add a ministry<br />or department</h2>
             <p style={{ margin: '0 auto 28px', maxWidth: 480, fontFamily: 'Montserrat', fontWeight: 400, fontSize: 14, lineHeight: 1.6, color: 'var(--ink-soft)' }}>
               Each tab is its own independent workbook — values, metrics, the five, teams, calendar, resources. Mix and match as many as you need.
             </p>
@@ -1111,7 +1109,7 @@
               <button onClick={() => addEntry('department')} style={emptyAddBtnStyle('outline')}>+ Add department</button>
             </div>
           </div>
-        )}
+        }
 
         {/* ===== Footer block ===== */}
         <section style={{
@@ -1137,7 +1135,7 @@
     background: kind === 'solid' ? 'var(--ink)' : 'transparent',
     color: kind === 'solid' ? 'var(--paper)' : 'var(--ink)',
     fontFamily: 'Montserrat', fontWeight: 900, fontSize: 12,
-    letterSpacing: '0.22em', textTransform: 'uppercase', cursor: 'pointer',
+    letterSpacing: '0.22em', textTransform: 'uppercase', cursor: 'pointer'
   });
 
   window.MPContrast = ContrastSpread;
@@ -1156,7 +1154,7 @@
         fontFamily: 'Montserrat, sans-serif',
         padding: '0 64px',
         minHeight: '100%',
-        position: 'relative',
+        position: 'relative'
       }}>
         <section style={{
           margin: '0 -64px',
@@ -1164,12 +1162,12 @@
           color: 'var(--paper)',
           padding: '64px 64px 56px',
           position: 'relative',
-          overflow: 'hidden',
+          overflow: 'hidden'
         }}>
           <div style={{
             position: 'absolute', right: -50, bottom: -100,
             fontFamily: 'Montserrat', fontWeight: 900, fontSize: 540, lineHeight: 0.8,
-            letterSpacing: '-0.05em', color: 'rgba(184,117,74,0.14)', userSelect: 'none',
+            letterSpacing: '-0.05em', color: 'rgba(184,117,74,0.14)', userSelect: 'none'
           }}>01</div>
           <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', position: 'relative', zIndex: 1 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
@@ -1208,7 +1206,7 @@
           padding: '40px 64px',
           display: 'flex',
           justifyContent: 'space-between',
-          alignItems: 'center',
+          alignItems: 'center'
         }}>
           <div style={{ fontFamily: 'Montserrat', fontWeight: 900, fontSize: 12, letterSpacing: '0.32em' }}>
             OAKHOUSE CHURCH · 2026–27
@@ -1217,8 +1215,8 @@
             PERSONAL PLAN
           </div>
         </section>
-      </div>
-    );
+      </div>);
+
   };
 
   window.MPPersonal = PersonalStandalone;
@@ -1227,7 +1225,7 @@
   function autosize(t) {
     if (!t) return;
     t.style.height = 'auto';
-    t.style.height = (t.scrollHeight + 2) + 'px';
+    t.style.height = t.scrollHeight + 2 + 'px';
   }
   document.addEventListener('input', (e) => {
     if (e.target && e.target.tagName === 'TEXTAREA' && e.target.classList.contains('mp-area')) {
