@@ -297,6 +297,14 @@
     const [entryCount, setEntryCount] = useState(1);
     const dirtyRef = useRef(false);
     const lastLoadedKeyRef = useRef(null);
+    // 'pending'  — load not yet completed; saves are blocked
+    // 'loaded'   — backend returned a populated plan; normal saves
+    // 'fresh'    — backend returned no row for this key; saves require meaningful content
+    // 'error'    — load failed; saves are blocked until reload succeeds
+    const loadStatusRef = useRef('pending');
+    // True while restoreFields is dispatching synthetic input events,
+    // so those don't get treated as user edits.
+    const restoringRef = useRef(false);
 
     // Track entry count for the submitter block by polling __mpState (cheap, only on render).
     useEffect(() => {
@@ -335,13 +343,17 @@
             if (data.plan) {
               const p = data.plan;
               requestAnimationFrame(() => requestAnimationFrame(() => {
+                restoringRef.current = true;
                 restoreFields(p.fields || {}, 'personal');
+                restoringRef.current = false;
                 setStatus('idle');
                 if (p.updatedAt) setSavedAt(new Date(p.updatedAt));
                 dirtyRef.current = false;
+                loadStatusRef.current = 'loaded';
               }));
             } else {
               setStatus('idle');
+              loadStatusRef.current = 'fresh';
             }
             return;
           }
@@ -357,28 +369,35 @@
             }
             // Wait for React to render entry panels, then restore the field values
             requestAnimationFrame(() => requestAnimationFrame(() => {
+              restoringRef.current = true;
               restoreFields(p.fields || {}, 'entry');
               // Also restore personal fields if we got them
               if (data.personalPlan?.fields) {
                 restoreFields(data.personalPlan.fields, 'personal');
               }
+              restoringRef.current = false;
               setStatus('idle');
               if (p.updatedAt) setSavedAt(new Date(p.updatedAt));
               dirtyRef.current = false;
+              loadStatusRef.current = 'loaded';
             }));
           } else {
             // No prior plan — but restore personal fields if present
             if (data.personalPlan?.fields) {
               requestAnimationFrame(() => requestAnimationFrame(() => {
+                restoringRef.current = true;
                 restoreFields(data.personalPlan.fields, 'personal');
+                restoringRef.current = false;
               }));
             }
             setStatus('idle');
+            loadStatusRef.current = 'fresh';
           }
         } catch (e) {
           console.error(e);
           setStatus('error');
           setError(e.message);
+          loadStatusRef.current = 'error';
         }
       })();
     }, [planKey, personalKey, planMeta.quarter, planMeta.year]);
@@ -389,6 +408,26 @@
 
       const save = debounce(async () => {
         if (!dirtyRef.current) return;
+        // Hard guard: never save if we haven't successfully loaded yet.
+        // This prevents the blank initial state from clobbering a real row
+        // during a slow load, a network error, or a transient null response.
+        if (loadStatusRef.current === 'pending' || loadStatusRef.current === 'error') {
+          dirtyRef.current = false;
+          return;
+        }
+        // Soft guard for 'fresh' (load returned no row): only save once the
+        // user has typed something meaningful. Protects against a transient
+        // null response wiping a real row when the user taps a single field.
+        if (loadStatusRef.current === 'fresh') {
+          const probe = snapshotAllFields();
+          const entries = window.__mpState?.entries || [];
+          const anyName = entries.some((e) => (e.name || '').trim().length > 0);
+          const fieldCount = Object.keys(probe.entryFields).length + Object.keys(probe.personalFields).length;
+          if (!anyName && fieldCount < 2) {
+            dirtyRef.current = false;
+            return;
+          }
+        }
         dirtyRef.current = false;
         setStatus('saving');
         try {
@@ -426,9 +465,16 @@
         }
       }, 1200);
 
-      const markDirty = () => { dirtyRef.current = true; save(); };
+      const markDirty = () => {
+        // Ignore everything until load completes one way or another.
+        if (loadStatusRef.current === 'pending' || loadStatusRef.current === 'error') return;
+        if (restoringRef.current) return;
+        dirtyRef.current = true;
+        save();
+      };
 
       const onAnyInput = (e) => {
+        if (restoringRef.current) return;
         if (e.target.closest && e.target.closest('[data-mp-submitter]')) return;
         if (!e.target.matches || !e.target.matches('input, textarea')) return;
         markDirty();
