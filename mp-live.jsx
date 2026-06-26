@@ -146,6 +146,12 @@
     const raw = params.get('personal') || '';
     return normalizeKey(raw);
   }
+  // The plan owner's email — used to auto-assign every synced Asana task to them.
+  // Set via ?owner=jane@oakhouse.org on the page URL, or window.MP_OWNER in the HTML.
+  function getOwner() {
+    const params = new URLSearchParams(window.location.search);
+    return (params.get('owner') || window.MP_OWNER || '').trim();
+  }
 
   /* ---------------- backend API ---------------- */
 
@@ -241,7 +247,7 @@
           {status === 'error' && <span style={{ color: '#f0a48b' }}>Save failed: {error}</span>}
           {syncStatus === 'syncing' && <span> · Syncing to Asana…</span>}
           {syncStatus === 'synced' && syncResult && (
-            <span style={{ color: '#9fd49f' }}> · ✓ Asana synced: {syncResult.created} created, {syncResult.updated} updated</span>
+            <span style={{ color: '#9fd49f' }}> · ✓ Asana synced: {syncResult.created} created, {syncResult.updated} updated{syncResult.assigned ? ' · assigned' : (syncResult.ownerRequested ? ' · ⚠ owner not found in Asana' : '')}</span>
           )}
           {syncStatus === 'sync-error' && <span style={{ color: '#f0a48b' }}> · Asana sync failed</span>}
         </div>
@@ -510,6 +516,7 @@
           planKey,
           quarter: planMeta.quarter,
           year: planMeta.year,
+          owner: getOwner() || undefined,
         });
         setSyncStatus('synced');
         setSyncResult(data);
