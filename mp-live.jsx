@@ -249,7 +249,7 @@
           {syncStatus === 'synced' && syncResult && (
             <span style={{ color: '#9fd49f' }}> · ✓ Asana synced: {syncResult.created} created, {syncResult.updated} updated{syncResult.assigned ? ' · assigned' : (syncResult.ownerRequested ? ' · ⚠ owner not found in Asana' : '')}</span>
           )}
-          {syncStatus === 'sync-error' && <span style={{ color: '#f0a48b' }}> · Asana sync failed</span>}
+          {syncStatus === 'sync-error' && <span style={{ color: '#f0a48b' }}> · Asana sync failed: {error}</span>}
         </div>
 
         {dashboardUrl && (
